@@ -6,23 +6,23 @@ import { ProjectsModule } from './projects/projects.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import * as process from 'node:process';
+import { ProjectSchema } from './projects/entities/project.entity';
+import { ProjectsController } from './projects/projects.controller';
+import { ProjectsService } from './projects/projects.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(
-      process.env.MONGODB_URI,
-      {
-        dbName: process.env.DB_NAME,
-      },
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URI, {
+      dbName: process.env.DB_NAME,
+    }),
+    MongooseModule.forFeature([{ name: 'Projects', schema: ProjectSchema }]),
     UsersModule,
     ProjectsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ProjectsController],
+  providers: [AppService, ProjectsService],
 })
-export class AppModule {
-}
+export class AppModule {}

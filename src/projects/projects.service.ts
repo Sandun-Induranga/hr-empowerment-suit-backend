@@ -7,31 +7,31 @@ import { IProject } from './interface/IProject';
 
 @Injectable()
 export class ProjectsService {
-  constructor(@InjectModel('Projects') private studentModel: Model<IProject>) {}
+  constructor(@InjectModel('Projects') private projectModel: Model<IProject>) {}
 
   async create(createProjectDto: CreateProjectDto): Promise<IProject> {
-    const newProject = new this.studentModel(createProjectDto);
+    const newProject = new this.projectModel(createProjectDto);
     return newProject.save();
   }
 
   async findAll(): Promise<IProject[]> {
-    return this.studentModel.find().exec();
+    return this.projectModel.find().exec();
   }
 
   async findOne(id: string): Promise<IProject> {
-    return this.studentModel.findById(id).exec();
+    return this.projectModel.findById(id).exec();
   }
 
   async update(
     id: string,
     updateProjectDto: UpdateProjectDto,
   ): Promise<IProject> {
-    return this.studentModel
+    return this.projectModel
       .findByIdAndUpdate(id, updateProjectDto, { new: true })
       .exec();
   }
 
   async remove(id: string): Promise<IProject> {
-    return this.studentModel.findByIdAndDelete(id).exec();
+    return this.projectModel.findByIdAndDelete(id).exec();
   }
 }
