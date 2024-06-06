@@ -9,6 +9,7 @@ import * as process from 'node:process';
 import { ProjectSchema } from './projects/entities/project.entity';
 import { ProjectsController } from './projects/projects.controller';
 import { ProjectsService } from './projects/projects.service';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ProjectsService } from './projects/projects.service';
     MongooseModule.forFeature([{ name: 'Projects', schema: ProjectSchema }]),
     UsersModule,
     ProjectsModule,
+    EmployeesModule,
   ],
   controllers: [AppController, ProjectsController],
   providers: [AppService, ProjectsService],
