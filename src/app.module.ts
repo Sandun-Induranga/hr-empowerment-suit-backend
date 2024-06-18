@@ -6,7 +6,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import * as process from 'node:process';
-import { ProjectSchema } from './projects/entities/project.entity';
+import { ProjectSchema } from './projects/schemas/project.schema';
 import { ProjectsController } from './projects/projects.controller';
 import { ProjectsService } from './projects/projects.service';
 import { EmployeesModule } from './employees/employees.module';
@@ -19,7 +19,7 @@ import { EmployeesModule } from './employees/employees.module';
     MongooseModule.forRoot(process.env.MONGODB_URI, {
       dbName: process.env.DB_NAME,
     }),
-    MongooseModule.forFeature([{ name: 'Projects', schema: ProjectSchema }]),
+    MongooseModule.forFeature([{ name: 'Project', schema: ProjectSchema }]),
     UsersModule,
     ProjectsModule,
     EmployeesModule,
