@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   const options = new DocumentBuilder()
     .setTitle('HR EMPOWERMENT API')
     .setDescription('The HR EMPOWERMENT API endpoints')
@@ -16,7 +17,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(5000);
 }
 
 bootstrap().then((r) => console.log('Server is running on port 3000'));
