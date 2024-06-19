@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { EmployeeDocument } from './schemas/employees.schema';
 
 @Injectable()
 export class EmployeesService {
 
   constructor(
-
+    @InjectModel('Employee') private employeeModel: Model<EmployeeDocument>,
   ) {
   }
   create(createEmployeeDto: CreateEmployeeDto) {
