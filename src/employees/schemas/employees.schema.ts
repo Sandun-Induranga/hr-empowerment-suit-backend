@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 export type ProjectDocument = Employee & Document;
 
 @Schema()
-export class Employee{
+export class Employee {
   @Prop({ required: true })
   employeeId: string;
 

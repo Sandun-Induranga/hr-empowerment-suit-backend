@@ -4,6 +4,11 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
 @Injectable()
 export class EmployeesService {
+
+  constructor(
+
+  ) {
+  }
   create(createEmployeeDto: CreateEmployeeDto) {
     return 'This action adds a new employee';
   }
