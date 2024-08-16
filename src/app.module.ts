@@ -12,7 +12,7 @@ import { ProjectsService } from './projects/projects.service';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeSchema } from './employees/schemas/employees.schema';
 import { AuthModule } from './auth/auth.module';
-import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -29,6 +29,10 @@ import { AuthModule } from './auth/auth.module';
         schema: EmployeeSchema,
       },
     ]),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1h' },
+    }),
     UsersModule,
     ProjectsModule,
     EmployeesModule,
