@@ -11,6 +11,7 @@ import { ProjectsController } from './projects/projects.controller';
 import { ProjectsService } from './projects/projects.service';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeSchema } from './employees/schemas/employees.schema';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EmployeeSchema } from './employees/schemas/employees.schema';
     UsersModule,
     ProjectsModule,
     EmployeesModule,
+    AuthModule,
   ],
   controllers: [AppController, ProjectsController],
   providers: [AppService, ProjectsService],
