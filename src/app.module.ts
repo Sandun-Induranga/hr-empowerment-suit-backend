@@ -12,6 +12,7 @@ import { ProjectsService } from './projects/projects.service';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeSchema } from './employees/schemas/employees.schema';
 import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
