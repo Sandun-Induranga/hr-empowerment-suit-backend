@@ -16,12 +16,6 @@ export class Project {
 
   @Prop({ required: true })
   created_at: Date;
-
-  @Prop({ required: true })
-  updated_at: Date;
-
-  @Prop({ required: true })
-  deleted_at: Date;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

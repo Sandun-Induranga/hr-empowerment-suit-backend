@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { CreateEmployeeDto } from '../../employees/dto/create-employee.dto';
 
 export type UserDocument = User & Document;
 
@@ -13,6 +14,9 @@ export class User {
 
   @Prop({ required: true })
   role: string;
+
+  @Prop()
+  employee: CreateEmployeeDto
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

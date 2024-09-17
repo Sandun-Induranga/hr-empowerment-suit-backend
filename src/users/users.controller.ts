@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt/jwt.auth.guard';
+import { CreateAuthDto } from '../auth/dto/create-auth.dto';
 
 @Controller('users')
 export class UsersController {
@@ -10,7 +11,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateAuthDto) {
     return this.usersService.create(createUserDto);
   }
 
