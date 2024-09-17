@@ -13,6 +13,7 @@ import { EmployeesModule } from './employees/employees.module';
 import { EmployeeSchema } from './employees/schemas/employees.schema';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { UserSchema } from './users/schemas/user.schema';
 
 @Module({
   imports: [
@@ -27,6 +28,10 @@ import { JwtModule } from '@nestjs/jwt';
       {
         name: 'Employee',
         schema: EmployeeSchema,
+      },
+      {
+        name: 'User',
+        schema: UserSchema,
       },
     ]),
     JwtModule.register({
