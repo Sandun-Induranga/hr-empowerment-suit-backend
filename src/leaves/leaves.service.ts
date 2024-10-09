@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateLeavesDto } from './dto/update-leaves.dto';
 import { CreateLeaveDto } from './dto/create-leaves.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Leaves, LeavesDocument } from './schemas/leaves.schema';
 
 @Injectable()
 export class LeavesService {
-  create(createLeafDto: CreateLeaveDto) {
-    return 'This action adds a new leaf';
+  constructor(
+    @InjectModel(Leaves.name) private leavesModel: Model<LeavesDocument>,
+  ) {}
+
+  async create(createLeaveDto: CreateLeaveDto) {
+    const newLeave = new this.leavesModel(createLeaveDto);
+    return newLeave.save();
   }
 
-  findAll() {
-    return `This action returns all leaves`;
+  async findAll() {
+    return this.leavesModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} leaf`;
+  async findOne(id: string) {
+    return this.leavesModel.findById(id).exec();
   }
 
-  update(id: number, updateLeafDto: UpdateLeavesDto) {
-    return `This action updates a #${id} leaf`;
+  async update(id: string, updateLeafDto: UpdateLeavesDto) {
+    return this.leavesModel
+      .findByIdAndUpdate(id, updateLeafDto, { new: true })
+      .exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} leaf`;
+  async remove(id: string) {
+    return this.leavesModel.findByIdAndDelete(id).exec();
   }
 }

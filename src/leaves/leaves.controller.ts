@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { LeavesService } from './leaves.service';
-import { CreateLeafDto } from './dto/create-leaves.dto';
 import { UpdateLeavesDto } from './dto/update-leaves.dto';
+import { CreateLeaveDto } from './dto/create-leaves.dto';
 
 @Controller('leaves')
 export class LeavesController {
   constructor(private readonly leavesService: LeavesService) {}
 
   @Post()
-  create(@Body() createLeafDto: CreateLeafDto) {
+  create(@Body() createLeafDto: CreateLeaveDto) {
     return this.leavesService.create(createLeafDto);
   }
 
@@ -19,16 +27,16 @@ export class LeavesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.leavesService.findOne(+id);
+    return this.leavesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLeafDto: UpdateLeavesDto) {
-    return this.leavesService.update(+id, updateLeafDto);
+    return this.leavesService.update(id, updateLeafDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.leavesService.remove(+id);
+    return this.leavesService.remove(id);
   }
 }

@@ -40,6 +40,10 @@ import { LeavesModule } from './leaves/leaves.module';
         name: 'Attendance',
         schema: AttendanceSchema,
       },
+      {
+        name: 'Leaves',
+        schema: LeavesModule,
+      },
     ]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
