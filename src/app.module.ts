@@ -16,6 +16,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserSchema } from './users/schemas/user.schema';
 import { AttendanceModule } from './attendance/attendance.module';
 import { AttendanceSchema } from './attendance/schemas/attendance.schema';
+import { LeavesModule } from './leaves/leaves.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { AttendanceSchema } from './attendance/schemas/attendance.schema';
     EmployeesModule,
     AuthModule,
     AttendanceModule,
+    LeavesModule,
   ],
   controllers: [AppController, ProjectsController],
   providers: [AppService, ProjectsService],
