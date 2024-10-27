@@ -15,6 +15,12 @@ export class User {
   @Prop({ required: true })
   role: string;
 
+  @Prop({ type: Number, default: null })
+  latitude: number;
+
+  @Prop({ type: Number, default: null })
+  longitude: number;
+
   @Prop()
   employee: CreateEmployeeDto
 }

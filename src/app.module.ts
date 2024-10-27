@@ -17,6 +17,7 @@ import { UserSchema } from './users/schemas/user.schema';
 import { AttendanceModule } from './attendance/attendance.module';
 import { AttendanceSchema } from './attendance/schemas/attendance.schema';
 import { LeavesModule } from './leaves/leaves.module';
+import { LeavesSchema } from './leaves/schemas/leaves.schema';
 
 @Module({
   imports: [
@@ -42,7 +43,7 @@ import { LeavesModule } from './leaves/leaves.module';
       },
       {
         name: 'Leaves',
-        schema: LeavesModule,
+        schema: LeavesSchema,
       },
     ]),
     JwtModule.register({

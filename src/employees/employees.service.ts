@@ -8,7 +8,7 @@ import { Employee, EmployeeDocument } from './schemas/employees.schema';
 @Injectable()
 export class EmployeesService {
   constructor(
-    @InjectModel('Employee') private employeeModel: Model<EmployeeDocument>,
+    @InjectModel(Employee.name) private employeeModel: Model<EmployeeDocument>,
   ) {}
 
   create(createEmployeeDto: CreateEmployeeDto): Promise<Employee> {

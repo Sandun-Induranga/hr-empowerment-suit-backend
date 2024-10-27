@@ -8,6 +8,8 @@ export class CreateEmployeeDto {
   @IsNotEmpty()
   name: string;
 
+  picture: string;
+
   @IsNotEmpty()
   address: string;
 
@@ -34,4 +36,7 @@ export class CreateEmployeeDto {
   @IsNotEmpty()
   @IsString()
   gender: string;
+
+  @IsNotEmpty()
+  joinDate: Date;
 }

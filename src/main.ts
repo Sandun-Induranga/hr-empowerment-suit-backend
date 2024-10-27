@@ -2,11 +2,19 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { json } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    credentials: true,
+    exposedHeaders: ['set-cookie'],
+  });
+
+  app.use(json({ limit: '50mb' }));
+
   const options = new DocumentBuilder()
     .setTitle('HR EMPOWERMENT API')
     .setDescription('The HR EMPOWERMENT API endpoints')

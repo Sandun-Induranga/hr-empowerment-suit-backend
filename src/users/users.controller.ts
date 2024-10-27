@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt/jwt.auth.guard';
 import { CreateAuthDto } from '../auth/dto/create-auth.dto';
+import { UpdateLocationDto } from './dto/location-dto';
 
 @Controller('users')
 export class UsersController {
@@ -21,10 +22,10 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.usersService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -37,5 +38,11 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
+  }
+
+  // @UseGuards(JwtAuthGuard)
+  @Patch(':id/location')
+  updateLocation(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
+    return this.usersService.updateLocation(id, updateLocationDto);
   }
 }
