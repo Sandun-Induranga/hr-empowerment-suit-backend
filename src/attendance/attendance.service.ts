@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAttendanceDto } from './dto/create-attendance.dto';
 import { UpdateAttendanceDto } from './dto/update-attendance.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -19,8 +19,12 @@ export class AttendanceService {
     return this.attendanceModel.find().exec();
   }
 
-  findOne(id: number) {
-    return this.attendanceModel.findById(id).exec();
+  async findOne(id: string)  {
+    const attendances = await this.attendanceModel.find({user_id: id}).exec();
+    if (!attendances) {
+      throw new NotFoundException(`Attendance record with ID ${id} not found`);
+    }
+    return attendances;
   }
 
   update(id: number, updateAttendanceDto: UpdateAttendanceDto) {

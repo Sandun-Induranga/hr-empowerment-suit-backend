@@ -19,7 +19,7 @@ export class AttendanceController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.attendanceService.findOne(+id);
+    return this.attendanceService.findOne(id);
   }
 
   @Patch(':id')
