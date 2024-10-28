@@ -39,4 +39,9 @@ export class ProjectsController {
   remove(@Param('id') id: string) {
     return this.projectsService.remove(id);
   }
+
+  @Get(':userId/users')
+  findProjectsByUserId(@Param('userId') userId: string) {
+    return this.projectsService.findProjectsByUserId(userId);
+  }
 }

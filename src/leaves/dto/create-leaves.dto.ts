@@ -4,13 +4,16 @@ import { IsNotEmpty, IsString, IsEnum } from 'class-validator';
 export class CreateLeaveDto {
   @IsString()
   @IsNotEmpty()
-  employeeId: string;
+  user_id: string;
 
   @IsNotEmpty()
-  startDate: Date;
+  date: Date;
+
+  @IsString()
+  reason: string;
 
   @IsNotEmpty()
-  endDate: Date;
+  day_count: Date;
 
   @IsEnum(['Pending', 'Approved', 'Rejected'])
   status: string;

@@ -11,7 +11,7 @@ import { UpdateLocationDto } from './dto/location-dto';
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-  ) {}
+  ) { }
 
   async create(createUserDto: CreateAuthDto): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string): Promise<User> {
-    let res = await this.userModel.findOne({email}).exec();
+    let res = await this.userModel.findOne({ email }).exec();
     return res;
   }
 
@@ -41,14 +41,26 @@ export class UsersService {
   }
 
   async updateLocation(id: string, updateLocationDto: UpdateLocationDto): Promise<User> {
-    const { latitude, longitude } = updateLocationDto;
-    console.log('updateLocationDto', updateLocationDto);
     const updatedUser = await this.userModel.findByIdAndUpdate(
-      id, 
+      id,
       updateLocationDto,
-      { new: true } // Returns the updated document
+      { new: true }
     ).exec();
-    
+
+    if (!updatedUser) {
+      throw new Error('User not found or update failed');
+    }
+
+    return updatedUser;
+  }
+
+  async updateStatus(id: string, status: boolean): Promise<User> {
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      id,
+      { $set: { 'employee.status': status } },
+      { new: true }
+    ).exec();
+
     if (!updatedUser) {
       throw new Error('User not found or update failed');
     }

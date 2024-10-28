@@ -39,4 +39,6 @@ export class CreateEmployeeDto {
 
   @IsNotEmpty()
   joinDate: Date;
+
+  status: string;
 }

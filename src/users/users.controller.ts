@@ -44,4 +44,10 @@ export class UsersController {
   updateLocation(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
     return this.usersService.updateLocation(id, updateLocationDto);
   }
+
+  @Patch(':id/status/:status')
+  updateStatus(@Param('id') id: string, @Param('status') status: boolean) {
+    return this.usersService.updateStatus(id, status);
+  }
+  
 }

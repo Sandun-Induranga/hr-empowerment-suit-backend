@@ -5,17 +5,21 @@ export type LeavesDocument = Leaves & Document;
 
 @Schema()
 export class Leaves {
-  @Prop({ required: true })
-  name: string;
 
   @Prop({ required: true })
-  description: string;
-
-  @Prop({ type: [String], required: true })
-  users: string[];
+  user_id: string;
 
   @Prop({ required: true })
-  created_at: Date;
+  reason: string;
+
+  @Prop({ required: true })
+  day_count: number;
+
+  @Prop({ required: true })
+  date: Date;
+
+  @Prop({ required: true })
+  status: string;
 }
 
 export const LeavesSchema = SchemaFactory.createForClass(Leaves);

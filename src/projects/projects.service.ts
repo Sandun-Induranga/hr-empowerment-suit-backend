@@ -36,4 +36,9 @@ export class ProjectsService {
   async remove(id: string): Promise<Project> {
     return this.projectModel.findByIdAndDelete(id).exec();
   }
+
+  async findProjectsByUserId(userId: string): Promise<Project[]> {
+    const all = await  this.projectModel.find().exec();
+    return all.filter(p => p.users.includes(userId));
+  }
 }
