@@ -19,6 +19,11 @@ export class CreateProjectDto {
   @IsNotEmpty({ each: true })
   users: string[];
 
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(50)
+  status: string;
+
   @IsNotEmpty()
   created_at: Date;
 }

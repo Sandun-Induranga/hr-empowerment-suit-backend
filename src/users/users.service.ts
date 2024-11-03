@@ -20,7 +20,9 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+    const data = await this.userModel.find().exec();
+    console.log(data);
+    return data;
   }
 
   async findOne(id: string): Promise<User> {
@@ -32,11 +34,11 @@ export class UsersService {
     return res;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
+  async update(id: any, updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userModel.findByIdAndUpdate(id, {...updateUserDto, updateUserDto}, { new: true }).exec();
   }
 
-  async remove(id: number): Promise<any> {
+  async remove(id: any): Promise<any> {
     return this.userModel.findByIdAndDelete(id).exec();
   }
 

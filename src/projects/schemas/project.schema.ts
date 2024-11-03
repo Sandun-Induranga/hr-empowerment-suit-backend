@@ -15,6 +15,9 @@ export class Project {
   users: string[];
 
   @Prop({ required: true })
+  status: string;
+
+  @Prop({ required: true })
   created_at: Date;
 }
 
