@@ -50,5 +50,10 @@ export class UsersController {
   updateStatus(@Param('id') id: string, @Param('status') status: boolean) {
     return this.usersService.updateStatus(id, status);
   }
+
+  @Get('count')
+  findCount(@Param('id') id: string) {
+    return this.usersService.findCount(id);
+  }
   
 }
