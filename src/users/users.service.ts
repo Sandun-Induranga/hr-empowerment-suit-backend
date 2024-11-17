@@ -6,6 +6,7 @@ import { User, UserDocument } from './schemas/user.schema';
 import { CreateAuthDto } from '../auth/dto/create-auth.dto';
 import { UpdateLocationDto } from './dto/location-dto';
 import { EmailService } from 'src/common/email.service';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +16,8 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateAuthDto): Promise<User> {
-    const createdUser = new this.userModel(createUserDto);
+    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    const createdUser = new this.userModel({...createUserDto, password: hashedPassword});
     await createdUser.save();
     await this.emailService.sendMail(
       createdUser.email,
@@ -27,7 +29,6 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     const data = await this.userModel.find().exec();
-    console.log(data);
     return data;
   }
 
@@ -41,8 +42,16 @@ export class UsersService {
   }
 
   async update(id: any, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.findOne(id);
+    const hashPassword = updateUserDto.password == ''? user.password : await bcrypt.hash(updateUserDto.password, 10);
+    const dto = {
+      ...updateUserDto,
+      password: hashPassword,
+      role: user.role
+    }
+
     const updatedUser = await this.userModel
-      .findByIdAndUpdate(id, { ...updateUserDto, updateUserDto }, { new: true })
+      .findByIdAndUpdate(id, dto, { new: true })
       .exec();
 
     if (!updatedUser) {
@@ -56,7 +65,6 @@ export class UsersService {
     );
 
     return updatedUser;
-
   }
 
   async remove(id: any): Promise<any> {
